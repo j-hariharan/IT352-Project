@@ -4,6 +4,7 @@ import HomePage from "./pages/home"
 import { useAuth } from "./lib/AuthContext"
 import LoginPage from "./pages/login"
 import SignupPage from "./pages/signup"
+import LandingPage from "./pages/landing"
 
 function App() {
 	let { user } = useAuth()
@@ -13,14 +14,16 @@ function App() {
 	}
 
 	const RequireNoAuth = () => {
-		return user ? <Navigate to="/" /> : <Outlet />
+		return user ? <Navigate to="/dashboard" /> : <Outlet />
 	}
 
 	return (
 		<>
 			<Routes>
+				<Route path="/" element={<LandingPage />} />
+				
                 <Route element={<RequireAuth />}>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/dashboard" element={<HomePage />} />
                 </Route>
 
                 <Route element={<RequireNoAuth />}>
